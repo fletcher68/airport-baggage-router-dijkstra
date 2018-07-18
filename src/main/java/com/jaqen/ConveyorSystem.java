@@ -12,7 +12,7 @@ public class ConveyorSystem
 
 	Node node1;
 	Node node2;
-	Long travelTime;
+	Integer travelTime;
 
 	public Node getNode1()
 	{
@@ -34,12 +34,12 @@ public class ConveyorSystem
 		this.node2 = n;
 	}
 
-	public Long getTravelTime()
+	public Integer getTravelTime()
 	{
 		return travelTime;
 	}
 
-	public void setTravelTime(Long travelTime)
+	public void setTravelTime(Integer travelTime)
 	{
 		this.travelTime = travelTime;
 	}

@@ -45,6 +45,9 @@ public class AirPortBaggage
 			scanner.close();
 
 			Graph g = new Graph(Node.getNodeCount());
+			
+			
+
 
 			buildObjectGraph(g, abr);
 
@@ -105,7 +108,7 @@ public class AirPortBaggage
 			ConveyorSystem cs1 = new ConveyorSystem();
 			Node p1 = Node.getNode(routeLegs[0]);
 			Node p2 = Node.getNode(routeLegs[1]);
-			Long travelTime = Long.parseLong(routeLegs[2]);
+			Integer travelTime = Integer.parseInt(routeLegs[2]);
 
 			cs1.setNode1(p1);
 			cs1.setNode2(p2);
@@ -214,6 +217,8 @@ public class AirPortBaggage
 	{
 		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("airport-baggage.out"));
 
+		DijkstraAlgorithmImpl dijkstraAlgorithm = new DijkstraAlgorithmImpl();
+		
 		for (Bag bag : abr.getBags())
 		{
 			Departure departure = abr.getDeparture(bag);
@@ -237,6 +242,9 @@ public class AirPortBaggage
 			 */
 			List<Integer> route = g.computePath(Node.getNode(start).getNodeId(), Node.getNode(end).getNodeId());
 
+			String path = dijkstraAlgorithm.findShortestPath(start, end, abr.getConveyorSystems());
+			System.out.println("DA="+path);
+			
 			System.out.print(bag.getBagNumber() + " ");
 			bufferedWriter.write(bag.getBagNumber() + " ");
 			for (Integer i : route)
