@@ -217,7 +217,7 @@ public class AirPortBaggage
 	{
 		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("airport-baggage.out"));
 
-		DijkstraAlgorithmImpl dijkstraAlgorithm = new DijkstraAlgorithmImpl();
+		OptimumPath dijkstraAlgorithm = new OptimumPath();
 		
 		for (Bag bag : abr.getBags())
 		{

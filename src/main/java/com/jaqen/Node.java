@@ -21,10 +21,8 @@ public class Node implements Comparable<Node>
 	private String name;
 	private Node previousNode = null;
 	private Integer nodeId;
-	private final Map<Node, Integer> neighbours = new HashMap<>(); // The neighbour Vertex and the time to it
-	private Integer time = Integer.MAX_VALUE; // Will be the total time for the shortest path to this Vertex from the
-																						// source
-	// Vertex specfied in the DijkstraGraphMap
+	private final Map<Node, Integer> neighbors = new HashMap<>();
+	private Integer time = Integer.MAX_VALUE;
 
 	/**
 	 * Return node given the node name. If multiple calls to this method are called
@@ -114,9 +112,9 @@ public class Node implements Comparable<Node>
 		return nodes.size();
 	}
 
-	public Map<Node, Integer> getNeighbours()
+	public Map<Node, Integer> getNeighbors()
 	{
-		return neighbours;
+		return neighbors;
 	}
 
 	public int getTime()
