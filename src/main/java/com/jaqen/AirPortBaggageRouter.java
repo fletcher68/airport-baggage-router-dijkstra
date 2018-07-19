@@ -158,49 +158,9 @@ public class AirPortBaggageRouter
 	 * 
 	 * @return
 	 */
-	public Long getTravelTimeBetweenNodes()
+	public Integer computeTotalTravelTime()
 	{
-
-		Long tt = 0L;
-
-		Iterator<Integer> itr = RouteBuilder.getInstance().getOptimalRoute().iterator();
-		int ctr = 0;
-		int previous = 0;
-		while (itr.hasNext())
-		{
-			int start = 0;
-			int end = 0;
-
-			if (ctr == 0)
-			{
-				start = itr.next();
-				end = itr.next();
-			}
-			else
-			{
-				start = previous;
-				end = itr.next();
-			}
-
-			Node startNode = Node.getNodeById(start);
-			Node endNode = Node.getNodeById(end);
-			for (ConveyorSystem cs : this.getConveyorSystems())
-			{
-				// System.out.println(cs+" "+n1+" "+n2);
-				if (cs.getNode1().getName().equals(startNode.getName()) && cs.getNode2().getName().equals(endNode.getName()))
-				{
-					tt += cs.getTravelTime();
-					break;
-				}
-
-			}
-
-			previous = end;
-
-			ctr++;
-		}
-
-		return tt;
+		List<Integer> rt = RouteBuilder.getInstance().getOptimalRoute(this);
+		return RouteBuilder.getInstance().computeTotalTravelTime(rt, this);
 	}
-
 }

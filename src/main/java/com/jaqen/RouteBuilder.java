@@ -1,6 +1,7 @@
 package com.jaqen;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public class RouteBuilder
 	 * The singleton instance
 	 */
 	private static RouteBuilder instance = null;
-
+	
 	/**
 	 * Current route. It is dynamically updated during recursion
 	 */
@@ -119,16 +120,19 @@ public class RouteBuilder
 	 * @return List<Integer>
 	 */
 
-	public List<Integer> getOptimalRoute()
+	public List<Integer> getOptimalRoute(AirPortBaggageRouter abr)
 	{
 		int min = 999;
 		int ctr = 0;
 		int index = 0;
+		if(abr==null)
+			return possibleRoutes.get(0);
 		for (List<Integer> l : possibleRoutes)
 		{
-			if (min > l.size())
+			Integer tt = computeTotalTravelTime(l, abr);
+			if (min > tt)
 			{
-				min = l.size();
+				min = tt;
 				index = ctr;
 			}
 			ctr++;
@@ -151,4 +155,55 @@ public class RouteBuilder
 		this.possibleRoutes.add(route);
 	}
 
+	
+	/**
+	 * Compute total travel time for a given route
+	 * 
+	 * @param route
+	 *          List<Integer>
+	 * @return Long total travel time
+	 */
+	public Integer computeTotalTravelTime(List<Integer> route, AirPortBaggageRouter abr)
+	{
+
+		Integer tt = 0;
+
+		Iterator<Integer> itr = route.iterator();
+		int ctr = 0;
+		int previous = 0;
+		while (itr.hasNext())
+		{
+			int start = 0;
+			int end = 0;
+
+			if (ctr == 0)
+			{
+				start = itr.next();
+				end = itr.next();
+			}
+			else
+			{
+				start = previous;
+				end = itr.next();
+			}
+
+			Node startNode = Node.getNodeById(start);
+			Node endNode = Node.getNodeById(end);
+			for (ConveyorSystem cs : abr.getConveyorSystems())
+			{
+				if (cs.getNode1().getName().equals(startNode.getName()) && cs.getNode2().getName().equals(endNode.getName()))
+				{
+					tt += cs.getTravelTime();
+					break;
+				}
+
+			}
+
+			previous = end;
+
+			ctr++;
+		}
+
+		return tt;
+	}
 }

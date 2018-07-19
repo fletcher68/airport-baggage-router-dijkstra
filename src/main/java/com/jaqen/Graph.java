@@ -74,6 +74,33 @@ public class Graph
 	 *          int node end
 	 * @return List<Integer> returns route as list of integers
 	 */
+	public List<Integer> computePath(int start, int end, AirPortBaggageRouter abr)
+	{
+
+		RouteBuilder rb = RouteBuilder.getInstance();
+		rb.initRoute();
+
+		boolean[] isVisited = new boolean[numNodes];
+		ArrayList<Integer> pathList = new ArrayList<>();
+
+		rb.addRouteNode(start);
+		pathList.add(start);
+
+		computePath(start, end, isVisited, pathList);
+
+		return RouteBuilder.getInstance().getOptimalRoute(abr);
+	}
+	
+	/**
+	 * Compute the path between a start and end node given a collection of nodes and
+	 * node routes
+	 * 
+	 * @param start
+	 *          int node start
+	 * @param end
+	 *          int node end
+	 * @return List<Integer> returns route as list of integers
+	 */
 	public List<Integer> computePath(int start, int end)
 	{
 
@@ -88,7 +115,7 @@ public class Graph
 
 		computePath(start, end, isVisited, pathList);
 
-		return RouteBuilder.getInstance().getOptimalRoute();
+		return RouteBuilder.getInstance().getOptimalRoute(null);
 	}
 
 	/**

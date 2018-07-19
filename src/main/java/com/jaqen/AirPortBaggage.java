@@ -240,7 +240,7 @@ public class AirPortBaggage
 			 * the following computePath method determines the route from start node to end
 			 * node and stashes computed route in the singleton object RouteBuilder
 			 */
-			List<Integer> route = g.computePath(Node.getNode(start).getNodeId(), Node.getNode(end).getNodeId());
+			List<Integer> route = g.computePath(Node.getNode(start).getNodeId(), Node.getNode(end).getNodeId(), abr);
 
 			String path = dijkstraAlgorithm.findShortestPath(start, end, abr.getConveyorSystems());
 			System.out.println("DA="+path);
@@ -253,7 +253,7 @@ public class AirPortBaggage
 				bufferedWriter.write(Node.getNodeById(i) + " ");
 			}
 
-			Long tt = abr.getTravelTimeBetweenNodes();
+			Integer tt = abr.computeTotalTravelTime();
 			System.out.print(": " + tt);
 			bufferedWriter.write(": " + tt);
 
