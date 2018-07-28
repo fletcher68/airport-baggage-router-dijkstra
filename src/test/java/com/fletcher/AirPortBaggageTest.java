@@ -4,14 +4,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.List;
 
 import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Test;
 import org.junit.runners.MethodSorters;
-
-import com.fletcher.AirPortBaggage;
-import com.fletcher.Graph;
 /**
  * 
  * AirPortBaggage test class. Test coverage is mainly on the Graph object since
@@ -27,103 +23,6 @@ import com.fletcher.Graph;
 class AirPortBaggageTest
 {
 	
-	/**
-	 * Test object graph method with a unidirectional path. Testing the graph object
-	 * is the backbone of the application
-	 */
-	@Test
-	void testZObjectGraph()
-	{
-		System.out.println("BEGIN UNIT TEST");
-
-		// Create a sample graph
-		Graph g = new Graph(12);
-		g.addRoute(0, 1);
-		g.addRoute(1, 2);
-		g.addRoute(2, 3);
-		g.addRoute(3, 4);
-		g.addRoute(4, 5);
-		g.addRoute(4, 6);
-		g.addRoute(4, 7);
-		g.addRoute(7, 8);
-		g.addRoute(8, 9);
-		g.addRoute(9, 10);
-		g.addRoute(10, 11);
-		g.addRoute(1, 0);
-		g.addRoute(2, 1);
-		g.addRoute(3, 2);
-		g.addRoute(4, 3);
-		g.addRoute(5, 4);
-		g.addRoute(6, 4);
-		g.addRoute(7, 4);
-		g.addRoute(8, 7);
-		g.addRoute(9, 8);
-		g.addRoute(10, 9);
-		g.addRoute(11, 10);
-
-		// arbitrary start node
-		int startNode = 10;
-
-		// arbitrary ending node
-		int endNode = 6;
-
-		List<Integer> route = g.computePath(startNode, endNode);
-
-		System.out.println("Following are all different paths from " + startNode + " to " + endNode);
-
-		StringBuilder sb = new StringBuilder();
-		for (int i : route)
-		{
-			sb.append(i + " ");
-		}
-
-		// fail("Not yet implemented");
-
-		System.out.println(sb.toString());
-
-		assert sb.toString().trim().equals("10 9 8 7 4 6");
-	}
-
-	/**
-	 * Test object graph method with a bidirectional path. Testing the graph object
-	 * is the backbone of the application
-	 */
-	@Test
-	void testYObjectGraph2()
-	{
-
-		// Create a sample graph
-		Graph g = new Graph(4);
-		g.addRoute(0, 1);
-		g.addRoute(0, 2);
-		g.addRoute(0, 3);
-		g.addRoute(2, 0);
-		g.addRoute(2, 1);
-		g.addRoute(1, 3);
-
-		// arbitrary start node
-		int startNode = 2;
-
-		// arbitrary ending node
-		int endNode = 3;
-
-		List<Integer> route = g.computePath(startNode, endNode);
-
-		System.out.println("Following are all different paths from " + startNode + " to " + endNode);
-
-		StringBuilder sb = new StringBuilder();
-
-		for (int i : route)
-		{
-			sb.append(i + " ");
-		}
-
-		System.out.println(sb.toString());
-
-		// fail("Not yet implemented");
-
-		assert sb.toString().trim().equals("2 0 3");
-	}
 
 	/**
 	 * This method is an attempt to test happy path the application beyond the

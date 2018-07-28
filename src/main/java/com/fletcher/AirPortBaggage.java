@@ -3,7 +3,6 @@ package com.fletcher;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -42,16 +41,9 @@ public class AirPortBaggage
 
 			readBaggageData(abr);
 
-			scanner.close();
-
-			Graph g = new Graph(Node.getNodeCount());
+			scanner.close();			
 			
-			
-
-
-			buildObjectGraph(g, abr);
-
-			outputBaggageRouteData(abr, g);
+			outputBaggageRouteData(abr);
 
 		}
 		catch (InvalidInputException e)
@@ -60,24 +52,6 @@ public class AirPortBaggage
 		}
 	}
 
-	/**
-	 * Build object graph
-	 * 
-	 * @param g
-	 *          AirPortBaggageRouter
-	 * @param abr
-	 *          Graph
-	 */
-	public static void buildObjectGraph(Graph g, AirPortBaggageRouter abr)
-	{
-		for (ConveyorSystem cs : abr.getConveyorSystems())
-		{
-			Node node1 = cs.getNode1();
-			Node node2 = cs.getNode2();
-			g.addRoute(node1.getNodeId(), node2.getNodeId());
-		}
-
-	}
 
 	/**
 	 * Read conveyor system data
@@ -213,11 +187,11 @@ public class AirPortBaggage
 	 *          Graph
 	 * @throws IOException
 	 */
-	public static void outputBaggageRouteData(AirPortBaggageRouter abr, Graph g) throws IOException
+	public static void outputBaggageRouteData(AirPortBaggageRouter abr) throws IOException
 	{
 		BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("airport-baggage.out"));
 
-		OptimumPath dijkstraAlgorithm = new OptimumPath();
+		DijkstraAlgorithm dijkstraAlgorithm = new DijkstraAlgorithm();
 		
 		for (Bag bag : abr.getBags())
 		{
@@ -236,26 +210,14 @@ public class AirPortBaggage
 				end = departure.getFlightGate();
 			}
 
-			/*
-			 * the following computePath method determines the route from start node to end
-			 * node and stashes computed route in the singleton object RouteBuilder
-			 */
-			List<Integer> route = g.computePath(Node.getNode(start).getNodeId(), Node.getNode(end).getNodeId(), abr);
 
 			String path = dijkstraAlgorithm.findShortestPath(start, end, abr.getConveyorSystems());
-			System.out.println("DA="+path);
 			
 			System.out.print(bag.getBagNumber() + " ");
 			bufferedWriter.write(bag.getBagNumber() + " ");
-			for (Integer i : route)
-			{
-				System.out.print(Node.getNodeById(i) + " ");
-				bufferedWriter.write(Node.getNodeById(i) + " ");
-			}
 
-			Integer tt = abr.computeTotalTravelTime();
-			System.out.print(": " + tt);
-			bufferedWriter.write(": " + tt);
+			System.out.print(path);
+			bufferedWriter.write(path);
 
 			System.out.println("");
 			bufferedWriter.newLine();
