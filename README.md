@@ -20,6 +20,7 @@ means a shorter travel time.
 
 <pre>
 .
+├── README.md
 ├── airport-baggage.in
 ├── build.gradle
 ├── gradle
@@ -29,29 +30,28 @@ means a shorter travel time.
 ├── gradle.properties
 ├── gradlew
 ├── gradlew.bat
-├── README  (THIS FILE)
 ├── settings.gradle
 └── src
     ├── main
-    │   ├── java
-    │   │   └── com
-    │   │       └── jaqen
-    │   │           ├── AirPortBaggage.java
-    │   │           ├── AirPortBaggageRouter.java
-    │   │           ├── Bag.java
-    │   │           ├── ConveyorSystem.java
-    │   │           ├── Departure.java
-    │   │           ├── Graph.java
-    │   │           ├── InvalidInputException.java
-    │   │           ├── Node.java
-    │   │           └── RouteBuilder.java
-    │   └── resources
+    │   └── java
+    │       └── com
+    │           └── fletcher
+    │               ├── AirPortBaggage.java
+    │               ├── AirPortBaggageRouter.java
+    │               ├── Bag.java
+    │               ├── ConveyorSystem.java
+    │               ├── Departure.java
+    │               ├── DijkstraAlgorithm.java
+    │               ├── GraphMap.java
+    │               ├── GraphMapException.java
+    │               ├── InvalidInputException.java
+    │               ├── Node.java
+    │               └── RouteBuilder.java
     └── test
-        ├── java
-        │   └── com
-        │       └── jaqen
-        │           └── AirPortBaggageTest.java
-        └── resources
+        └── java
+            └── com
+                └── fletcher
+                    └── AirPortBaggageTest.java
 </pre>
 
 <h3>To clone this repo</h3>
