@@ -25,11 +25,7 @@ class AirPortBaggageTest
 	
 
 	/**
-	 * This method is an attempt to test happy path the application beyond the
-	 * Graph object.  All input is valid. The AirPortBaggage class is the main entry point and reads
-	 * stdin. The contents of the input file is stored as a string, and written to a
-	 * ByteArrayInputStream to mock stdin.  The stdout is written to ByteArrayOutputStream
-	 * Asserts Expected result compare with stdout 
+     * read stdin input and assert stdout is what was expected
 	 *  
 	 */
 	@Test
