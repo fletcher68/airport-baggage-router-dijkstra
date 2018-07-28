@@ -56,7 +56,7 @@ means a shorter travel time.
 
 <h3>To clone this repo</h3>
 <pre>
-git clone https://github.com/many-faced-g0d/airport-baggage-router.git
+git clone https://github.com/fletcher68/airport-baggage-router.git
 </pre>
 
 Java 1.8 is required to run this program.  
