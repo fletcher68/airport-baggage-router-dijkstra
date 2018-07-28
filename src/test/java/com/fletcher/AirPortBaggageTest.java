@@ -72,20 +72,21 @@ class AirPortBaggageTest
 				"0005 A7 A8 A9 A10 A5 BaggageClaim : 12\n";
 		
 		System.setIn(new ByteArrayInputStream(input.getBytes()));
-		 
-	  ByteArrayOutputStream baos = new ByteArrayOutputStream();
-	  PrintStream ps = new PrintStream(baos); 
-	  System.setOut(ps);
-	  
+
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(baos);
+		System.setOut(ps);
+
 		try
 		{
-			String [] args = {"",""};
+			String[] args =
+			{ "", "" };
 			AirPortBaggage.main(args);
-		}
+		} 
 		catch (IOException e)
 		{
 			e.printStackTrace();
-		}
+		} 
 		catch (java.util.NoSuchElementException e)
 		{
 			// e.printStackTrace();
@@ -93,8 +94,8 @@ class AirPortBaggageTest
 		}
 
 		String output = baos.toString();
-		
-		if(!expected.equals(output))
+
+		if (!expected.equals(output))
 		{
 			System.out.println("ERROR, stdout does not match expected result");
 		}
