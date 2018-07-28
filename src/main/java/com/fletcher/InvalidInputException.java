@@ -1,4 +1,4 @@
-package com.jaqen;
+package com.fletcher;
 
 public class InvalidInputException extends Exception
 {

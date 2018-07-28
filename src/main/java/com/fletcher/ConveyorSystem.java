@@ -1,4 +1,4 @@
-package com.jaqen;
+package com.fletcher;
 
 /**
  * Domain object to store conveyor system

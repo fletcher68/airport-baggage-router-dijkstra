@@ -1,4 +1,4 @@
-package com.jaqen;
+package com.fletcher;
 
 /**
  * Bag domain object

@@ -111,11 +111,11 @@ Produces the following output...
 > Task :test
 
 
-com.jaqen.AirPortBaggageTest > testYObjectGraph2() STANDARD_OUT
+com.fletcher.AirPortBaggageTest > testYObjectGraph2() STANDARD_OUT
     Following are all different paths from 2 to 3
     2 0 1 3 2 0 3 2 1 3 
 
-com.jaqen.AirPortBaggageTest > testZObjectGraph() STANDARD_OUT
+com.fletcher.AirPortBaggageTest > testZObjectGraph() STANDARD_OUT
     BEGIN UNIT TEST
     Following are all different paths from 10 to 6
     10 9 8 7 4 6 
