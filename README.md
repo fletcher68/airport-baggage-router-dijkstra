@@ -12,11 +12,11 @@ routing to get bags to their destinations. Bags with a flight id of â€œARRIVALâ€
 Below is the project structure.  It contains all source code, 
 build files, and a gradle binary for building the code.  
 
-The code uses a Graph object and uses recursion to find all valid routes
-from start to end node.  Only the optimized route is returned, i.e., the
-minimum number of node hops from start node to end node.  Time is not 
-considered when computing the optimized route.  It is assumed that fewer hops
-means a shorter travel time.
+The code uses dijkstra's algorithm to find the most optimum path from start 
+to end node given a set of directed edges.  Only the optimized route is 
+returned, i.e., the minimum number of node hops from start node to end node.  
+Time is not considered when computing the optimized route.  It is assumed 
+that fewer hops means a shorter travel time.
 
 <pre>
 .
@@ -56,7 +56,7 @@ means a shorter travel time.
 
 <h3>To clone this repo</h3>
 <pre>
-git clone https://github.com/fletcher68/airport-baggage-router.git
+git clone https://github.com/fletcher68/airport-baggage-router-dijkstra.git
 </pre>
 
 Java 1.8 is required to run this program.  
@@ -110,16 +110,6 @@ Produces the following output...
 
 > Task :test
 
-
-com.fletcher.AirPortBaggageTest > testYObjectGraph2() STANDARD_OUT
-    Following are all different paths from 2 to 3
-    2 0 1 3 2 0 3 2 1 3 
-
-com.fletcher.AirPortBaggageTest > testZObjectGraph() STANDARD_OUT
-    BEGIN UNIT TEST
-    Following are all different paths from 10 to 6
-    10 9 8 7 4 6 
-
 > Task :check
 > Task :build
 
@@ -129,7 +119,7 @@ BUILD SUCCESSFUL in 1s
 
 To run code, execute the following command on the command line.
 
-> java -jar ./build/libs/airport-baggage-router-1.0.jar < airport-baggage.in 
+> java -jar build/libs/airport-baggage-router-dijkstra-1.0.jar  < airport-baggage.in
 
 Produces the following stdout:
 

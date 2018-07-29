@@ -10,28 +10,28 @@ package com.fletcher;
 public class ConveyorSystem
 {
 
-	Node node1;
-	Node node2;
+	Node start;
+	Node end;
 	Integer travelTime;
 
-	public Node getNode1()
+	public Node getStart()
 	{
-		return node1;
+		return start;
 	}
 
-	public void setNode1(Node n)
+	public void setStart(Node n)
 	{
-		this.node1 = n;
+		this.start = n;
 	}
 
-	public Node getNode2()
+	public Node getEnd()
 	{
-		return node2;
+		return end;
 	}
 
-	public void setNode2(Node n)
+	public void setEnd(Node n)
 	{
-		this.node2 = n;
+		this.end = n;
 	}
 
 	public Integer getTravelTime()
@@ -46,6 +46,6 @@ public class ConveyorSystem
 
 	public String toString()
 	{
-		return "[" + node1 + "][" + node2 + "][" + travelTime + "]";
+		return "[" + start + "][" + end + "][" + travelTime + "]";
 	}
 }

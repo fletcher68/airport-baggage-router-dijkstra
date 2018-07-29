@@ -6,10 +6,7 @@ import java.util.List;
 /**
  * Class to encapsulate collection of all domain objects pertaining to the
  * AirPortBaggage router system. Contains collections of conveyorsystems,
- * departures, and bags. Also contains a helper method used to compute travel
- * time across a conveyor system route that as been computed and stored in the
- * singleton -> RouteBuilder.getInstance().getStashedRoute(), a collection of
- * integers
+ * departures, and bags.
  * 
  * @author Kent Fletcher
  * @date 7/12/2018
@@ -77,8 +74,7 @@ public class AirPortBaggageRouter
 	/**
 	 * For a given bag, get the departure object
 	 * 
-	 * @param bag
-	 *          Bag
+	 * @param bag Bag
 	 * @return Departure
 	 */
 	public Departure getDeparture(Bag bag)
@@ -129,8 +125,7 @@ public class AirPortBaggageRouter
 	/**
 	 * Set list of bags
 	 * 
-	 * @param bags
-	 *          List<Bag>
+	 * @param bags List<Bag>
 	 */
 	public void setBags(List<Bag> bags)
 	{
@@ -140,26 +135,11 @@ public class AirPortBaggageRouter
 	/**
 	 * Add a bag to intaernal collection object -> bags
 	 * 
-	 * @param bag
-	 *          Bag
+	 * @param bag Bag
 	 */
 	public void addBag(Bag bag)
 	{
 		this.bags.add(bag);
 	}
 
-	/**
-	 * Helper method to compute the travel time between nodes across a the conveyor
-	 * system route. The route must be stored in the singleton object ->
-	 * RouteBuilder.getInstance().getStashedRoute() before this method gets called.
-	 * The method "public void computePath(...)" on the Graph object stores the
-	 * route in this singleton once it is computed
-	 * 
-	 * @return
-	 */
-	public Integer computeTotalTravelTime()
-	{
-		List<Integer> rt = RouteBuilder.getInstance().getOptimalRoute(this);
-		return RouteBuilder.getInstance().computeTotalTravelTime(rt, this);
-	}
 }

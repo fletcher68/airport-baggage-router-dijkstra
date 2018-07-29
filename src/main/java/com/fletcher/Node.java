@@ -28,8 +28,7 @@ public class Node implements Comparable<Node>
 	 * Return node given the node name. If multiple calls to this method are called
 	 * with the same name, the same node instance is returned
 	 * 
-	 * @param name
-	 *          String
+	 * @param name String
 	 * @return Node
 	 */
 	public static Node getNode(String name)
@@ -48,8 +47,7 @@ public class Node implements Comparable<Node>
 	/**
 	 * Return the node instance given its unique integer identifier
 	 * 
-	 * @param id
-	 *          Integer
+	 * @param id Integer
 	 * @return Node
 	 */
 	public static Node getNodeById(Integer id)
@@ -66,6 +64,10 @@ public class Node implements Comparable<Node>
 		return rtnNode;
 	}
 
+	/**
+	 * Make default constructor private. Can't be new'd up, can only retrieve an
+	 * instance of node by name or by id
+	 */
 	private Node()
 	{
 
@@ -137,6 +139,11 @@ public class Node implements Comparable<Node>
 		this.previousNode = previousNode;
 	}
 
+	/**
+	 * Return the shortest path to this node as a list of nodes
+	 * 
+	 * @return List<Node>
+	 */
 	public List<Node> getShortestPathTo()
 	{
 		List<Node> path = new ArrayList<Node>();
@@ -152,13 +159,16 @@ public class Node implements Comparable<Node>
 		return path;
 	}
 
+	/**
+	 * Override compareTo based on shortest time between this node and that node
+	 */
 	@Override
-	public int compareTo(Node o)
+	public int compareTo(Node thatNode)
 	{
-		if (time == o.time)
-			return name.compareTo(o.name);
+		if (this.time == thatNode.time)
+			return this.name.compareTo(thatNode.name);
 
-		return Integer.compare(time, o.time);
+		return Integer.compare(this.time, thatNode.time);
 	}
 
 }

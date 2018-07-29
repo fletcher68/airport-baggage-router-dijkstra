@@ -6,23 +6,41 @@ import java.util.Map;
 import java.util.NavigableSet;
 import java.util.TreeSet;
 
+/**
+ * Wrapper class containing a map of graph nodes and methods invoked by
+ * Dijkstra's Algorithm
+ * 
+ * @author fletcher
+ *
+ */
 public class GraphMap
 {
+	/**
+	 * Internal map of nodes and their immediate neighbors
+	 */
 	private Map<String, Node> graphMap;
 
+	/**
+	 * Public constructor
+	 */
 	public GraphMap()
 	{
 
 	}
-	
+
+	/**
+	 * Build graph hash map given a list of conveyor system routes
+	 * 
+	 * @param conveyorSystemRoutes List<ConveyorSystem>
+	 */
 	public void buildGraphMap(List<ConveyorSystem> conveyorSystemRoutes)
 	{
 		graphMap = new HashMap<>(conveyorSystemRoutes.size());
 
 		for (ConveyorSystem e : conveyorSystemRoutes)
 		{
-			String start = e.getNode1().getName();
-			String end = e.getNode2().getName();
+			String start = e.getStart().getName();
+			String end = e.getEnd().getName();
 			if (!graphMap.containsKey(start))
 				graphMap.put(start, Node.getNode(start));
 			if (!graphMap.containsKey(end))
@@ -31,15 +49,15 @@ public class GraphMap
 
 		for (ConveyorSystem e : conveyorSystemRoutes)
 		{
-			String start = e.getNode1().getName();
-			String end = e.getNode2().getName();
+			String start = e.getStart().getName();
+			String end = e.getEnd().getName();
 			graphMap.get(start).getNeighbors().put(graphMap.get(end), e.getTravelTime());
 		}
 
 		for (ConveyorSystem e : conveyorSystemRoutes)
 		{
-			String start = e.getNode1().getName();
-			String end = e.getNode2().getName();
+			String start = e.getStart().getName();
+			String end = e.getEnd().getName();
 			Node n = graphMap.get(end);
 			Node s = graphMap.get(start);
 			s.getNeighbors().put(n, e.getTravelTime());
@@ -47,18 +65,16 @@ public class GraphMap
 	}
 
 	/**
-	 * Run algorithm using a specified source node. Every time when the
-	 * starting node get changed, this algorithm should get run.
+	 * Run algorithm using a specified source node. Every time when the starting
+	 * node get changed, this algorithm should get run.
 	 * 
-	 * @param startName
-	 *          the starting or source node for the path
+	 * @param startName the starting or source node for the path
 	 */
 	public void computePaths(String startName)
 	{
 		if (!graphMap.containsKey(startName))
 		{
-			throw new GraphMapException(
-					"This GraphMap does not contain the starting Node named:" + startName);
+			throw new GraphMapException("This GraphMap does not contain the starting Node named:" + startName);
 		}
 
 		Node start = graphMap.get(startName);
@@ -71,15 +87,14 @@ public class GraphMap
 			queue.add(n);
 		}
 
-		traverseNodes(queue);
+		determineQuickestPathToNeighbor(queue);
 	}
 
 	/**
-	 * Get the shortest path as a list of nodes for a specific destination Node
-	 * with name as endName
+	 * Get the shortest path as a list of nodes for a specific destination Node with
+	 * name as endName
 	 * 
-	 * @param endName
-	 *          the destination node name
+	 * @param endName the destination node name
 	 * @return the shortest path as a List<Node>
 	 */
 
@@ -93,13 +108,19 @@ public class GraphMap
 		return graphMap.get(endName).getShortestPathTo();
 	}
 
-	private void traverseNodes(final NavigableSet<Node> q)
+	/**
+	 * Determine quickest path to neighboring nodes based on the shortest travel
+	 * time
+	 * 
+	 * @param q NavigableSet<Node> an ordered queue of neighboring nodes
+	 */
+	private void determineQuickestPathToNeighbor(final NavigableSet<Node> q)
 	{
 		while (!q.isEmpty())
 		{
-			Node n = q.pollFirst(); 
+			Node n = q.pollFirst();
 			if (n.getTime() == Integer.MAX_VALUE)
-				break; 
+				break;
 
 			for (Map.Entry<Node, Integer> a : n.getNeighbors().entrySet())
 			{
@@ -107,7 +128,7 @@ public class GraphMap
 
 				final int alternateTime = n.getTime() + a.getValue();
 				if (alternateTime < neighbor.getTime())
-				{ 
+				{
 					/*
 					 * Then a shorter path to neighbor found
 					 */

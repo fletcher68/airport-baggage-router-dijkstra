@@ -7,8 +7,8 @@ import java.util.Scanner;
 
 /**
  * Main class The system will route baggage checked, connecting, and 
- * terminating in Denver. Will route bags to their flights or the 
- * proper baggage claim
+ * terminating in Denver per the exercise. Will route bags to their 
+ * flights or the proper baggage claim
  * 
  * @author Kent Fletcher
  * @date 7/12/2018
@@ -17,6 +17,9 @@ import java.util.Scanner;
 public class AirPortBaggage
 {
 
+	/**
+	 * stdin reader
+	 */
 	private static final Scanner scanner = new Scanner(System.in);
 
 	/**
@@ -84,15 +87,15 @@ public class AirPortBaggage
 			Node p2 = Node.getNode(routeLegs[1]);
 			Integer travelTime = Integer.parseInt(routeLegs[2]);
 
-			cs1.setNode1(p1);
-			cs1.setNode2(p2);
+			cs1.setStart(p1);
+			cs1.setEnd(p2);
 			cs1.setTravelTime(travelTime);
 
 			abr.addConveyorSystem(cs1);
 
 			ConveyorSystem cs2 = new ConveyorSystem();
-			cs2.setNode1(p2);
-			cs2.setNode2(p1);
+			cs2.setStart(p2);
+			cs2.setEnd(p1);
 			cs2.setTravelTime(travelTime);
 
 			abr.addConveyorSystem(cs2);
